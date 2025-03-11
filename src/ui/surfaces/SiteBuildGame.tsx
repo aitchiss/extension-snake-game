@@ -4,6 +4,14 @@ const BLOCK_SIZE = 25;
 const TOTAL_ROW = 17;
 const TOTAL_COL = 17;
 
+// TODO:
+// - Button to start the game / move keyboard focus into the canvas; press a key to start? or countdown
+// - Button to restart the game
+// - Game over notice
+// - Speed settings
+//  - Styling
+//  - Types
+
 export default function SiteBuildGame() {
   const boardRef = useRef<HTMLCanvasElement>(null);
 
@@ -39,19 +47,6 @@ export default function SiteBuildGame() {
   let foodY;
 
   let gameOver = false;
-
-  //   window.onload = function () {
-  //       // Set board height and width
-  //       board = document.getElementById("board");
-  //       board.height = total_row * blockSize;
-  //       board.width = total_col * blockSize;
-  //       context = board.getContext("2d");
-
-  //       placeFood();
-  //       document.addEventListener("keyup", changeDirection);  //for movements
-  //       // Set snake speed
-  //       setInterval(update, 1000 / 10);
-  //   }
 
   function update() {
     if (gameOver) {
@@ -91,8 +86,8 @@ export default function SiteBuildGame() {
         context.fillRect(
           snakeBody[i][0],
           snakeBody[i][1],
-          blockSize,
-          blockSize
+          BLOCK_SIZE,
+          BLOCK_SIZE
         );
       }
     }
