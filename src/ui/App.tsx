@@ -6,7 +6,6 @@ import { useState } from "react";
 import { SiteConfiguration } from "./surfaces/SiteConfiguration.jsx";
 import { TeamConfiguration } from "./surfaces/TeamConfiguration.jsx";
 
-
 import { trpc } from "./trpc.js";
 
 export const App = () => {
@@ -20,22 +19,16 @@ export const App = () => {
           fetch,
         }),
       ],
-    }),
+    })
   );
 
   return (
     <trpc.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         <SurfaceRouter>
-          <SurfaceRoute surface={Surfaces.SiteConfiguration}>
-            <SiteConfiguration />
+          <SurfaceRoute surface={Surfaces.SiteBuildGame}>
+            <p>hello world</p>
           </SurfaceRoute>
-
-          <SurfaceRoute surface={Surfaces.TeamConfiguration}>
-            <TeamConfiguration />
-          </SurfaceRoute>
-          
-          
         </SurfaceRouter>
       </QueryClientProvider>
     </trpc.Provider>
