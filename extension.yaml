@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://sdk.netlify.com/sdk/config-schema.json
 config:
-  slug: kq1ie17--snake-deploy-game
+  slug: snake
   name: snake-game
   scopes:
     site: ["read", "write"]
