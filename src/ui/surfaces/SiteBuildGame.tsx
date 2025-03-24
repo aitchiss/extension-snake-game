@@ -40,7 +40,8 @@ export default function SiteBuildGame() {
       }
       placeFood();
       document.addEventListener("keyup", changeDirection);
-      focusHandlerBtnRef.current?.focus();
+      // Small timeout to make sure changing between games on the side panel doesn't steal focus first
+      setTimeout(() => focusHandlerBtnRef.current?.focus(), 100);
       intervalId = setInterval(update, 2000 / SPEED);
       setLoaded(true);
     }
@@ -170,15 +171,17 @@ export default function SiteBuildGame() {
         ref={focusHandlerBtnRef}
       ></button>
 
-      <div className="tw-mb-4">
+      <div className="tw-mb-2 tw-flex tw-flex-col tw-items-center tw-gap-2 tw-w-full tw-min-h-[75px]">
         {!gameStarted && <h3>Press any arrow key to start the game</h3>}
-        {gameStarted && !gameOver && <h3>Your score: {score}</h3>}
         {gameOver && (
-          <div className="tw-flex tw-flex-col tw-gap-4">
-            <h3>Game Over!</h3>
-            <Button onClick={resetGame}>Reset</Button>
+          <div className="tw-flex tw-gap-4 tw-items-center">
+            <h3 className="tw-shrink-0">Game Over!</h3>
+            <Button onClick={resetGame} className="">
+              Reset
+            </Button>
           </div>
         )}
+        <h3>Your score: {score}</h3>
       </div>
       <div className="tw-relative">
         <svg
@@ -192,7 +195,7 @@ export default function SiteBuildGame() {
           color={"#36382d"}
         >
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             d="m27.46 1.05 19.49 19.49.72.72.33.8v3.88l-.33.8-.72.72-19.49 19.49-.72.72-.8.33h-3.88l-.8-.33-.72-.72L1.05 27.46l-.72-.72-.33-.8v-3.88l.33-.8.72-.72L20.54 1.05l.72-.72.8-.33h3.88l.8.33zm-5.2 33.1v9.36l.25.25h2.98l.25-.25v-9.36l-.25-.25h-2.98zm0-20.3V4.5l.25-.25h2.98l.25.25v9.36l-.25.25h-2.98l-.25-.25ZM14 36.57h.4l2.73-2.73v-2.16l-.29-.3h-2.16l-2.73 2.73v.41zM11.94 14v-.4l2.05-2.06h.4l2.73 2.73v2.17l-.29.29h-2.16zm2.29 8.27H3.7l-.25.25v2.98l.25.25h10.53l.24-.25v-3l-.24-.25Zm15.35 7.94H26.6l-.24-.25V23c0-1.25-.49-2.2-1.99-2.24-.77-.02-1.65 0-2.59.04l-.14.15v9.01l-.25.25h-2.97l-.25-.25v-11.9l.25-.25h6.7c2.6 0 4.7 2.1 4.7 4.71v7.44zm4.2-4.46H44.3l.25-.25v-2.98l-.25-.25H33.77l-.24.25v2.98l.24.25Z"
           ></path>
         </svg>
