@@ -4,13 +4,13 @@ Install this extension to play Snake while waiting for your site to deploy.
 
 ## Objective
 
-Snake is a classic arcade game where you control a snake that moves around a confined area. The objective is to eat as much food as possible to grow your snake while avoiding collisions with the walls and your own tail.
+Snake is a classic arcade game where you control a snake that moves around a confined area. The objective is to capture as many Netlify logos as possible to grow your snake while avoiding collisions with the walls and your own tail.
 
 ## How to Play
 
 1. Use the arrow keys (Up, Down, Left, Right) to control the direction of the snake.
 2. The snake will continuously move in the direction you choose.
-3. Eat the food that appears on the screen to grow your snake and increase your score.
+3. Capture the Netlify logos that appear on the screen to grow your snake and increase your score.
 4. Avoid hitting the walls or your own tail, as this will end the game.
 5. The game gets progressively more challenging as your snake grows longer.
 

@@ -194,7 +194,7 @@ export default function SiteBuildGame() {
 
         <div className="tw-mb-2 tw-flex tw-flex-col tw-items-center tw-gap-2 tw-w-full tw-min-h-[75px]">
           {!gameStarted && <h3>Press any arrow key to start</h3>}
-          <p className="tw-text-center tw-mb-2">Eat food to grow, avoid walls and your tail.</p>
+          <p className="tw-text-center tw-mb-2">Capture Netlify logos to grow, avoid walls and your tail.</p>
           {gameOver && (
             <div className="tw-flex tw-mb-2 tw-gap-4 tw-items-center">
               <h3 className="tw-shrink-0">Game Over!</h3>
