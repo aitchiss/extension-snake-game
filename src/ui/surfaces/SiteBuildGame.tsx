@@ -1,10 +1,7 @@
 import {
-  Button,
-  ButtonGroup,
-  Form,
-  Select,
+  Button
 } from "@netlify/sdk/ui/react/components";
-import { useLayoutEffect, useRef, useState, type KeyboardEvent } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 
 const BLOCK_SIZE = 20;
 const TOTAL_ROW = 20;
@@ -15,12 +12,14 @@ const SPEED = 12;
 
 // TODO:
 // - Speed settings
-//  - Types
+// - Arrows scroll the page
+// - The snake eats itself if you go up and left immediately (should queue movement or cancel movement)
+// - Background is black in dark mode
 
 export default function SiteBuildGame() {
   const boardRef = useRef<HTMLCanvasElement>(null);
   const focusHandlerBtnRef = useRef<HTMLButtonElement>(null);
-  const foodRef = useRef<SVGElement>(null);
+  const foodRef = useRef<SVGSVGElement>(null);
 
   const [loaded, setLoaded] = useState(false);
   const [context, setContext] = useState<CanvasRenderingContext2D | null>();
@@ -28,7 +27,7 @@ export default function SiteBuildGame() {
   const [gameStarted, setGameStarted] = useState(false);
   const [score, setScore] = useState(0);
 
-  let intervalId;
+  let intervalId: number | undefined;
 
   useLayoutEffect(() => {
     if (boardRef.current) {
@@ -46,7 +45,7 @@ export default function SiteBuildGame() {
       setLoaded(true);
     }
 
-    return () => () => {
+    return () => {
       document.removeEventListener("keyup", changeDirection);
       clearInterval(intervalId);
     };
@@ -59,16 +58,16 @@ export default function SiteBuildGame() {
   let speedX = 0; //speed of snake in x coordinate.
   let speedY = 0; //speed of snake in Y coordinate.
 
-  let snakeBody = [];
+  let snakeBody: [number, number][] = [];
 
-  let foodX;
-  let foodY;
+  let foodX: number;
+  let foodY: number;
 
   function update() {
     // Background of a Game
     if (context) {
       context.fillStyle = "#929678";
-      context.fillRect(0, 0, boardRef.current.width, boardRef.current.height);
+      context.fillRect(0, 0, boardRef.current!.width, boardRef.current!.height);
 
       // Set food position
       if (foodRef.current) {
@@ -156,6 +155,13 @@ export default function SiteBuildGame() {
   function placeFood() {
     foodX = Math.floor(Math.random() * TOTAL_COL) * BLOCK_SIZE;
     foodY = Math.floor(Math.random() * TOTAL_ROW) * BLOCK_SIZE;
+    // Check if food is inside snake
+    for (let i = 0; i < snakeBody.length; i++) {
+      if (foodX == snakeBody[i][0] && foodY == snakeBody[i][1]) {
+        placeFood();
+        return;
+      }
+    }
   }
 
   function resetGame() {
